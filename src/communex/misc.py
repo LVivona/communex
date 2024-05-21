@@ -254,7 +254,6 @@ def get_global_params(c_client: CommuneClient) -> NetworkParams:
         }
     )
     burn_config = c_client.get_burn_config()
-
     min_burn = burn_config["min_burn"]
     max_burn = burn_config["max_burn"]
     adjustment_alpha = burn_config["adjustment_alpha"]

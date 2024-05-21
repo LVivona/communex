@@ -52,12 +52,12 @@ def register(
             burn = client.get_burn(netuid)
         case (None, new_subnet_name):
             subnet_name = new_subnet_name
-            burn = client.get_min_burn()
+            burn_config = client.get_burn_config()
+            burn = burn_config["min_burn"]
         case (_, _):
             raise ValueError(
                 "`--netuid` and `--new_subnet_name` cannot be provided at the same time"
             )
-
     do_burn = context.confirm(
         f"{c_balance.from_nano(burn)} $COMAI will be permanently burned. Do you want to continue?"
     )
@@ -85,7 +85,7 @@ def register(
             name=name,
             address=address,
             subnet=subnet_name,
-            min_stake=stake_nano,
+            stake=stake_nano,
             metadata=metadata,
         )
 

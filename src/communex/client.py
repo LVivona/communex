@@ -70,7 +70,7 @@ class CommuneClient:
         self.wait_for_finalization = wait_for_finalization
         self._connection_queue = queue.Queue(num_connections)
         self.url = url
-        
+
         for _ in range(num_connections):
             self._connection_queue.put(SubstrateInterface(url))
 
@@ -1085,7 +1085,7 @@ class CommuneClient:
         name: str,
         address: str | None = None,
         subnet: str = "commune",
-        min_stake: int | None = None,
+        stake: int = 0,
         metadata: str | None = None,
     ) -> ExtrinsicReceipt:
         """
@@ -1108,8 +1108,6 @@ class CommuneClient:
             InvalidParameterError: If the provided parameters are invalid.
             ChainTransactionError: If the transaction fails.
         """
-
-        stake = self.get_min_stake() if min_stake is None else min_stake
 
         key_addr = key.ss58_address
 
